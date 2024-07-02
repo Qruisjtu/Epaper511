@@ -77,12 +77,12 @@ void getTime(tm &timeinfo_get){
 
 
 /*************绘图模块 ***********************************/
-//选择帧
+//选择帧(显示未选择的帧会导致花屏!)
 void frame::activate(){
   Paint_NewImage(thisframe,epaperw,epaperh,180,WHITE);
   Paint_SelectImage(thisframe);
   //selected=1;
-  //Serial.print("选择帧成功\r\n");
+  Serial.print("选择帧成功\r\n");
 }
 void frame::clear(){
   Paint_Clear(WHITE);
@@ -114,10 +114,10 @@ void frame::printstr(UWORD Xstart, UWORD Ystart, const char * pString,UBYTE lang
   }
   if(lang==0){
     if(style==0){
-      Paint_DrawString_EN(Xstart,Ystart,pString,Fonts,BLACK,WHITE);
+      Paint_DrawString_EN(Xstart,Ystart,pString,Fonts,WHITE,BLACK);
     }
     else{
-      Paint_DrawString_EN(Xstart,Ystart,pString,Fonts,WHITE,BLACK);
+      Paint_DrawString_EN(Xstart,Ystart,pString,Fonts,BLACK,WHITE);
     }
   }
   else if(lang==1){
@@ -151,4 +151,5 @@ void frame::printpic(const unsigned char* image_buffer){
 }
 void frame::display(){
   EPD_5IN83_V2_Display(thisframe);
+  Serial.print("打印帧成功\r\n");
 }

@@ -27,7 +27,7 @@
     #include <ArduinoJson.h>
     //e-paper relative functions
     //initize the e-paper(5.83inch)
-    #define epaperinit() {DEV_Module_Init();EPD_5IN83_V2_Init();EPD_5IN83_V2_Clear();delay(500);}
+    #define epaperinit() {DEV_Module_Init();EPD_5IN83_V2_Init();EPD_5IN83_V2_Clear();Serial.print("初始化成功\r\n");delay(500);}
     //Clear e-paper
     #define ClearPage() {Serial.print("Clear Page\r\n");EPD_5IN83_V2_Clear();}
     //Switch to sleep mode
@@ -51,11 +51,12 @@
             frame(){
                 thisframe=(newimage *)malloc(imagebyte);
                 //selected=0;
-                //Serial.print("帧构造成功\r\n");
+                Serial.print("帧构造成功\r\n");
             }
             ~frame(){
                 free(thisframe);
                 thisframe=NULL;
+                Serial.print("删除帧成功\r\n");
             }
             void activate();
             void clear();
@@ -73,7 +74,9 @@
             /*字体对照表:
             0-font8(默认);1-font12;2-font16;3-font20;4-font24;*/
             void printnum(UWORD Xstart, UWORD Ystart,int32_t Nummber,UBYTE fontnum,UBYTE style=0);
+            //写入图片数据
             void printpic(const unsigned char* image_buffer);
+            //打印帧
             void display();
     };
 

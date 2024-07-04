@@ -214,6 +214,24 @@ void frame::printpicH(const unsigned char* image_buffer){
 void frame::printpicP(const unsigned char *image_buffer, UWORD xStart, UWORD yStart, UWORD W_Image, UWORD H_Image){
   Paint_DrawImage(image_buffer,xStart,yStart,W_Image,H_Image);
 }
+
+void frame::printtime(UWORD Xstart, UWORD Ystart, tm *pTime,int fontnum,int style){
+  sFONT* Fonts=&Font8;
+  switch(fontnum){
+    case 0: Fonts=&Font8;break;
+    case 1: Fonts=&Font12;break;
+    case 2: Fonts=&Font16;break;
+    case 3: Fonts=&Font20;break;
+    case 4: Fonts=&Font24;break;
+    default:;
+  }
+  if(style==0){
+    Paint_DrawTime(Xstart,Ystart,pTime,Fonts,WHITE,BLACK);
+  }else{
+    Paint_DrawTime(Xstart,Ystart,pTime,Fonts,BLACK,WHITE);
+  }
+}
+
 void frame::display(){
   EPD_5IN83_V2_Display(thisframe);
   Serial.print("打印帧成功\r\n");

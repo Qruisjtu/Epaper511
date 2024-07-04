@@ -1,42 +1,54 @@
 #include "511.h"
-//一些功能测试函数
-void frametest(){
-  epaperinit();
-  frame aframe;
-  aframe.activate();
-  aframe.clear();
-  aframe.printstr(0,0,"hello world",0,4);
-  aframe.display();
-  delay(3000);
-  frame bframe;
-  bframe.activate();
-  bframe.clear();
-  bframe.printstr(epaperw/2-32*3,epaperh/2-41/2,"你好,微雪电子.",1,0);
-  bframe.display();
-  delay(5000);
-  ClearPage();
-  SleepMode();
-}
-
+//pinMode(LED_GPIO,OUTPUT);//测试用LED灯
+Button beginB(beginb_GPIO);
+Button nextB(nextb_GPIO);
+Button confirmB(confirmb_GPIO);
+bool isopen=0;
+bool once=0;
 /* setup --------------------------------------------------------------------*/
 void setup()
 {
-  pinMode(LED_GPIO,OUTPUT);
-  Serial.begin(115200);//串口
-  wificonnect();
-  delay(1000);
-  Weather weatherinfo;
-  getWeather(weatherinfo,2);
-  Serial.printf("天气情况: 目前%s: %s %d°C\r\n明天:%s %s",weatherinfo.city.c_str(),weatherinfo.info.c_str(),weatherinfo.temp,weatherinfo.nextday->info.c_str(),weatherinfo.nextday->daytemp.c_str());
-  Serial.printf("后天天气%s",weatherinfo.nextday->nextday->info.c_str());
-  deleteWeather(weatherinfo,2);
-}
+  Serial.begin(115200);//串口set up
 
+}
+frame basicframe;
+int count=1;
 /* The main loop -------------------------------------------------------------*/
 void loop()
-{
-  
-
+{ 
+  if(beginB.isPressed()){
+    if(!isopen){
+      epaperinit();
+      basicframe.activate();
+      basicframe.clear();
+      isopen=1;
+    }else{ 
+      basicframe.clear();
+      basicframe.printstr(epaperw/2-10*14/2,epaperh/2-20/2,"Quiting...",0,3);
+      basicframe.display();
+      delay(1000);
+      ClearPage();
+      SleepMode();
+      isopen=0;
+      once=0;
+      count=1;
+    }
+  }
+  if(isopen){
+    if(!once){
+      basicframe.clear();
+      basicframe.printnum(epaperw/2,epaperh/2,count,4);
+      basicframe.display();
+      once=1;
+    }
+    if(nextB.isPressed()){
+        count++;
+        basicframe.clear();
+        basicframe.printnum(epaperw/2,epaperh/2,count,4);
+        basicframe.display();
+    }
+  }
+  delay(100);
 }
 
 

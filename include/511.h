@@ -28,7 +28,8 @@
     #include <ArduinoJson.h>
     #include <stdlib.h>
     #include <cstring>
-    //e-paper relative functions
+
+//e-paper relative functions-----
     //initize the e-paper(5.83inch)
     #define epaperinit() {DEV_Module_Init();EPD_5IN83_V2_Init();EPD_5IN83_V2_Clear();Serial.print("初始化成功\r\n");delay(500);}
     //Clear e-paper
@@ -41,7 +42,7 @@
     #define imagebyte (((EPD_5IN83_V2_WIDTH % 8 == 0) ? (EPD_5IN83_V2_WIDTH / 8 ) : (EPD_5IN83_V2_WIDTH / 8 + 1)) * EPD_5IN83_V2_HEIGHT)
     #define LED_GPIO 2
     
-    //wifi relative function
+//wifi relative function-----
     //注意天气有实时和预报,内容不同,用*nextday联系
     struct Weather{
         String city;
@@ -61,7 +62,7 @@
 
 
 
-    //paint related function
+//paint related function-----
     class frame{
         private:
             newimage *thisframe;
@@ -95,6 +96,24 @@
             void printpic(const unsigned char* image_buffer);
             //打印帧
             void display();
+    };
+
+//button related function-----
+    #define beginb_GPIO 34
+    #define nextb_GPIO 35
+    #define confirmb_GPIO 32
+    #define debounceDelay 20
+    //按钮类
+    class Button {
+        private:
+            uint8_t pin;
+            //uint8_t buttonstate;
+            //uint8_t lastbuttonstate;
+            bool status;
+            static uint8_t debouncedelay;
+        public:
+            Button(uint8_t gpio):pin(gpio),status(0){pinMode(pin,INPUT_PULLDOWN);Serial.print("创建按钮类\r\n");}
+            bool isPressed();
     };
 
 #endif

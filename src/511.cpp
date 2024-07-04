@@ -124,7 +124,16 @@ void getTime(tm &timeinfo_get){
   localtime_r(&now_get,&timeinfo_get);
 }
 
-
+//天气测试函数
+void weatherreporttest(){
+  wificonnect();
+  delay(1000);
+  Weather weatherinfo;
+  getWeather(weatherinfo,2);
+  Serial.printf("天气情况: 目前%s: %s %d°C\r\n明天:%s %s\r\n",weatherinfo.city.c_str(),weatherinfo.info.c_str(),weatherinfo.temp,weatherinfo.nextday->info.c_str(),weatherinfo.nextday->daytemp.c_str());
+  Serial.printf("后天天气%s",weatherinfo.nextday->nextday->info.c_str());
+  deleteWeather(weatherinfo,2);
+}
 
 
 
@@ -205,4 +214,38 @@ void frame::printpic(const unsigned char* image_buffer){
 void frame::display(){
   EPD_5IN83_V2_Display(thisframe);
   Serial.print("打印帧成功\r\n");
+}
+
+//frame测试函数
+void frametest(){
+  epaperinit();
+  frame aframe;
+  aframe.activate();
+  aframe.clear();
+  aframe.printstr(0,0,"hello world",0,3);
+  aframe.display();
+  delay(3000);
+  frame bframe;
+  bframe.activate();
+  bframe.clear();
+  bframe.printstr(epaperw/2-32*3,epaperh/2-41/2,"你好,微雪电子.",1,0);
+  bframe.display();
+  delay(5000);
+  ClearPage();
+  SleepMode();
+}
+/*************按钮模块 ***********************************/
+bool Button::isPressed(){
+  if(digitalRead(pin)){
+      delay(debounceDelay);
+      if(digitalRead(pin)&&!status){
+        status = !status;
+        return 1;
+      }else if(!digitalRead(pin)){
+        status = false;
+      }
+  }else{
+    status=false;
+  }
+  return 0;
 }

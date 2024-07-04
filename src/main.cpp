@@ -37,6 +37,10 @@ void loop()
   if(isopen){
     if(!once){
       basicframe.clear();
+      
+      basicframe.printpicP(gImage_cat2,0,0,190,193);
+      //Paint_DrawImage(gImage_vsc,100,0,400,400);
+      Paint_SetPixel(0,0,BLACK);
       basicframe.printnum(epaperw/2,epaperh/2,count,4);
       basicframe.display();
       once=1;
@@ -44,11 +48,11 @@ void loop()
     if(nextB.isPressed()){
         count++;
         basicframe.clear();
-        basicframe.printnum(epaperw/2,epaperh/2,count,4);
+        basicframe.printpicH(gImage_vsc);
+        basicframe.printnum(count*5,count*5,count,4);
         basicframe.display();
     }
   }
   delay(100);
 }
-
 

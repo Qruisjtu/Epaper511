@@ -23,7 +23,14 @@
  * THE SOFTWARE.
  */
 
-extern const unsigned char gImage_5in83_V2[];
-extern const unsigned char gImage_vsc[];
-extern const unsigned char gImage_gemen[];
+//关联imagebuffer
+extern const unsigned char 
+gImage_vsc[],
+gImage_gemen[],
+gImage_cat2[]
+;
+
+
+
+
 /* FILE END */

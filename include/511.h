@@ -92,8 +92,10 @@
             |0-font8(默认)|1-font12|2-font16|3-font20|4-font24|*/
             /*style=0白底黑字(默认),style=1黑底白字*/
             void printnum(UWORD Xstart, UWORD Ystart,int32_t Nummber,UBYTE fontnum,UBYTE style=0);
-            //写入图片数据
-            void printpic(const unsigned char* image_buffer);
+            //写入图片数据,全屏
+            void printpicH(const unsigned char* image_buffer);
+            //写入图片数据,任意大小,参数均为bits,一定要填写正确
+            void printpicP(const unsigned char *image_buffer, UWORD xStart, UWORD yStart, UWORD W_Image, UWORD H_Image);
             //打印帧
             void display();
     };

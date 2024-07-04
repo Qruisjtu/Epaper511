@@ -208,8 +208,11 @@ void frame::printnum(UWORD Xstart, UWORD Ystart,int32_t Nummber,UBYTE fontnum,UB
     Paint_DrawNum(Xstart,Ystart,Nummber,Fonts,WHITE,BLACK);
   }
 }
-void frame::printpic(const unsigned char* image_buffer){
+void frame::printpicH(const unsigned char* image_buffer){
   Paint_DrawBitMap(image_buffer);
+}
+void frame::printpicP(const unsigned char *image_buffer, UWORD xStart, UWORD yStart, UWORD W_Image, UWORD H_Image){
+  Paint_DrawImage(image_buffer,xStart,yStart,W_Image,H_Image);
 }
 void frame::display(){
   EPD_5IN83_V2_Display(thisframe);

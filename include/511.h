@@ -1,6 +1,7 @@
 /**
 * @File      	  :	511.h
 * @Author         : Qruisjtu
+* @email          : 724715050@qq.com
 * @Function       : Simplify and Pack the use of Paint functions&HTTP communication functions
 * @Info           :
 *  epaperinit()    :initialize e-paper
@@ -10,7 +11,7 @@
 *  imagebyte       :image c-file size
 *  frame           :basic paint unit,encapsulated from GUI_Paint
 *----------------
-* |	This version:   V1.0
+* |	This version:   V1.1.1
 * | Date        :   2024-06-28
 * | Info        :   Alpha version
 **/
@@ -58,7 +59,7 @@
     void getTime(tm &timeinfo_get);
     void getWeather(Weather &weather,int n);
     void deleteWeather(Weather &weather,int n);
-
+    void weatherreporttest();
 
 
 
@@ -96,7 +97,11 @@
             void printpicH(const unsigned char* image_buffer);
             //写入图片数据,任意大小,参数均为bits,一定要填写正确
             void printpicP(const unsigned char *image_buffer, UWORD xStart, UWORD yStart, UWORD W_Image, UWORD H_Image);
-            //打印帧
+            /*|字体对照表(fontnum)|:
+            |0-font8(默认)|1-font12|2-font16|3-font20|4-font24|*/
+            /*style=0白底黑字(默认),style=1黑底白字*/            
+            void printtime(UWORD Xstart, UWORD Ystart, tm *pTime,int fontnum=0,int style=0);
+            //打印帧            
             void display();
     };
 
@@ -104,7 +109,7 @@
     #define beginb_GPIO 34
     #define nextb_GPIO 35
     #define confirmb_GPIO 32
-    #define debounceDelay 20
+    #define debounceDelay 30
     //按钮类
     class Button {
         private:

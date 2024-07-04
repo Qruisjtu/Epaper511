@@ -51,6 +51,7 @@ void loop()
         basicframe.printpicH(gImage_vsc);
         basicframe.printnum(count*5,count*5,count,4);
         basicframe.display();
+        int i=0;
     }
   }
   delay(100);

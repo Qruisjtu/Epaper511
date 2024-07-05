@@ -23,6 +23,7 @@
     #include"EPD.h"
     #include"GUI_Paint.h"
     #include"ImageData.h"
+    #include"fonts.h"
     #include <time.h>
     #include <WiFi.h>
     #include <HTTPClient.h>

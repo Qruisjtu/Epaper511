@@ -88,6 +88,8 @@ extern sFONT Font8;
 
 extern cFONT Font12CN;
 extern cFONT Font24CN;
+
+extern cFONT Font24CN_Weather;
 // extern const unsigned char Font16_Table[];
 
 #ifdef __cplusplus

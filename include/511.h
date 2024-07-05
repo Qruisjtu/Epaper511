@@ -32,11 +32,11 @@
 
 //e-paper relative functions-----
     //initize the e-paper(5.83inch)
-    #define epaperinit() {DEV_Module_Init();EPD_5IN83_V2_Init();EPD_5IN83_V2_Clear();Serial.print("初始化成功\r\n");delay(500);}
+    #define epaperinit() {DEV_Module_Init();EPD_5IN83_V2_Init();EPD_5IN83_V2_Clear();/*Serial.print("初始化成功\r\n")*/;delay(500);}
     //Clear e-paper
-    #define ClearPage() {Serial.print("Clear Page\r\n");EPD_5IN83_V2_Clear();}
+    #define ClearPage() {/*Serial.print("Clear Page\r\n")*/;EPD_5IN83_V2_Clear();}
     //Switch to sleep mode
-    #define SleepMode() {Serial.print("Go to sleep\r\n");EPD_5IN83_V2_Sleep();}
+    #define SleepMode() {/*Serial.print("Go to sleep\r\n")*/;EPD_5IN83_V2_Sleep();}
     #define epaperw EPD_5IN83_V2_WIDTH
     #define epaperh EPD_5IN83_V2_HEIGHT
     #define newimage UBYTE
@@ -70,12 +70,12 @@
         public:
             frame(){
                 thisframe=(newimage *)malloc(imagebyte);
-                Serial.print("帧构造成功\r\n");
+                //Serial.print("帧构造成功\r\n");
             }
             ~frame(){
                 free(thisframe);
                 thisframe=NULL;
-                Serial.print("删除帧成功\r\n");
+                //Serial.print("删除帧成功\r\n");
             }
             void activate();
             void clear();
@@ -117,9 +117,11 @@
             //uint8_t buttonstate;
             //uint8_t lastbuttonstate;
             bool status;
-            static uint8_t debouncedelay;
+            //static uint8_t debouncedelay;
         public:
-            Button(uint8_t gpio):pin(gpio),status(0){pinMode(pin,INPUT_PULLDOWN);Serial.print("创建按钮类\r\n");}
+            Button(uint8_t gpio):pin(gpio),status(0){
+                pinMode(pin,INPUT_PULLDOWN);
+                }
             bool isPressed();
     };
 

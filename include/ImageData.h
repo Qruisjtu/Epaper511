@@ -27,7 +27,11 @@
 extern const unsigned char 
 gImage_vsc[],
 gImage_gemen[],
-gImage_cat2[]
+gImage_cat2[],
+gImage_1[],
+gImage_2[],
+gImage_3[],
+gImage_4[]
 ;
 
 

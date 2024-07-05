@@ -168,7 +168,7 @@ void frame::printstr(UWORD Xstart, UWORD Ystart, const char * pString,UBYTE lang
   switch(fontnum){
     case 0: Fonts=&Font8;Fontc=&Font12CN;break;
     case 1: Fonts=&Font12;Fontc=&Font24CN;break;
-    case 2: Fonts=&Font16;break;
+    case 2: Fonts=&Font16;Fontc=&Font24CN_Weather;break;
     case 3: Fonts=&Font20;break;
     case 4: Fonts=&Font24;break;
     default:;

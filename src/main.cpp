@@ -5,11 +5,25 @@ Button beginB(beginb_GPIO);//开机/关机按钮
 Button nextB(nextb_GPIO);//next按钮
 Button confirmB(confirmb_GPIO);//确认按钮
 frame startpage;//起始界面
+frame menu;//菜单界面
+frame functionpage;//功能界面
 Weather weatherinfo;//天气结构体
 tm timeinfo;//时间结构体
 int count=1;
+int menupage=0;
 bool isopen=0;
 bool runonce=0;
+
+void weathermodule(){
+
+}
+void calendarmodule(){
+
+}
+void settingmodule(){
+
+}
+
 
 /* setup --------------------------------------------------------------------*/
 void setup()
@@ -55,26 +69,42 @@ void loop()
     //开机时只运行一次的命令
     getTime(timeinfo);
     if(!runonce){
-      startpage.clear();
-      startpage.printtime(440,70,&timeinfo,4);
-      startpage.display();
+      menu.activate();
+      menu.clear();
+      menu.printpicH(gImage_1);
+      menu.printtime(390,40,&timeinfo,5);
+      menu.display();
       runonce=1;
     }
     //开机后一直运行的指令
     if(timeinfo.tm_sec==0){
       epaperinit();
-      startpage.clear();
-      startpage.printtime(440,70,&timeinfo,4);
-      startpage.display();
+      menu.windowsclear(330,20,620,125,WHITE);
+      menu.printtime(390,40,&timeinfo,5);
+      menu.display();
       SleepMode();
     }
     if(nextB.isPressed()){
       //next按钮被按下
-      count++;
-      // startpage.clear();
-      // startpage.printpicH(gImage_vsc);
-      // startpage.printnum(count*5,count*5,count,4);
-      // startpage.display();
+      epaperinit();
+      switch(menupage){
+        case 0:menu.clear();menu.printpicH(gImage_2);menu.printtime(390,40,&timeinfo,5);menu.display();menupage=1;break;
+        case 1:menu.clear();menu.printpicH(gImage_3);menu.printtime(390,40,&timeinfo,5);menu.display();menupage=2;break;
+        case 2:menu.clear();menu.printpicH(gImage_4);menu.printtime(390,40,&timeinfo,5);menu.display();menupage=3;break;
+        case 3:menu.clear();menu.printpicH(gImage_2);menu.printtime(390,40,&timeinfo,5);menu.display();menupage=1;break;
+        default:SleepMode();
+      }
+    }
+    if(confirmB.isPressed()){
+      //确认按钮被按下
+      epaperinit();
+      switch(menupage){
+        case 1:;break;//天气模块
+        case 2:;break;//日历模块
+        case 3:;break;//设置模块
+        default:;
+      }
+      SleepMode();
     }
   }
   delay(100);//监测按钮状态间隔
